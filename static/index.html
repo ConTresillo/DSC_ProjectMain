@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+  <title>Slot Control</title>
 </head>
 <body>
-$END$
+  <h1>Sot Control Panel</h1>
+
+  <div>
+    <h2>Slot 1</h2>
+    <button onclick="send(1, 'book')">Book</button>
+    <button onclick="send(1, 'verify')">Verify</button>
+    <button onclick="send(1, 'decline')">Decline</button>
+  </div>
+
+  <div>
+    <h2>Slot 2</h2>
+    <button onclick="send(2, 'book')">Book</button>
+    <button onclick="send(2, 'verify')">Verify</button>
+    <button onclick="send(2, 'decline')">Decline</button>
+  </div>
+
+  <script>
+    async function send(slotId, action) {
+      const response = await fetch(
+        `/api/v1/slots/${slotId}/${action}`,
+        { method: "POST" }
+      );
+
+      const data = await response.json();
+      console.log(data);
+      alert(JSON.stringify(data));
+    }
+  </script>
 </body>
 </html>
